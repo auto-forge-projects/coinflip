@@ -1,0 +1,11 @@
+{
+  "name": "coinflip",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Minimal yazı-tura web uygulaması (sıfır bağımlılık)",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test tests/*.test.js"
+  }
+}
