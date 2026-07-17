@@ -1,0 +1,15 @@
+{
+  "_comment": "Per-repo proje deploy config. enabled:true yapınca ve push'layınca imaj GHCR'a gider, ajan deploy eder. Düz sır yok; env_ref sırların yerini işaret eder.",
+  "enabled": false,
+  "repo_mode": "per-repo",
+  "registry": "ghcr.io/auto-forge-projects",
+  "domain": "apps.sametemek.com",
+  "subdomain": "{project}",
+  "proxy": "nginx",
+  "port": 3000,
+  "host_port": null,
+  "env_ref": "github-secrets",
+  "tls": "wildcard",
+  "cert_base": "/etc/letsencrypt/live/apps.sametemek.com",
+  "healthcheck": "/health"
+}
