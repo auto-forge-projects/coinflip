@@ -10,6 +10,12 @@
 set -euo pipefail
 : "${PROJECT:?} ${IMAGE:?} ${HOST:?} ${HOST_PORT:?} ${PORT:?} ${CERT_BASE:?}"
 
+# Private GHCR paketleri için otomatik login (GHCR_TOKEN/GHCR_USER verilirse).
+# Böylece paketi elle public yapmaya gerek kalmaz; verilmezse public paket varsayılır.
+if [ -n "${GHCR_TOKEN:-}" ] && [ -n "${GHCR_USER:-}" ]; then
+  echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USER" --password-stdin >/dev/null
+fi
+
 docker pull "$IMAGE"
 docker rm -f "$PROJECT" >/dev/null 2>&1 || true
 docker run -d --name "$PROJECT" --restart unless-stopped -p "127.0.0.1:${HOST_PORT}:${PORT}" "$IMAGE"

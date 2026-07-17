@@ -73,4 +73,4 @@ jobs:
           OWNER="$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')"
           IMG="ghcr.io/$OWNER/coinflip:latest"
           ssh -o StrictHostKeyChecking=accept-new -i ~/.ssh/id "$DEPLOY_USER@$DEPLOY_HOST" \
-            "PROJECT='coinflip' IMAGE='$IMG' HOST='${{ steps.cfg.outputs.host }}' HOST_PORT='${{ steps.cfg.outputs.host_port }}' PORT='${{ steps.cfg.outputs.port }}' CERT_BASE='${{ steps.cfg.outputs.cert_base }}' bash -s" < deploy/remote-deploy.sh
+            "GHCR_TOKEN='${{ secrets.GITHUB_TOKEN }}' GHCR_USER='${{ github.actor }}' PROJECT='coinflip' IMAGE='$IMG' HOST='${{ steps.cfg.outputs.host }}' HOST_PORT='${{ steps.cfg.outputs.host_port }}' PORT='${{ steps.cfg.outputs.port }}' CERT_BASE='${{ steps.cfg.outputs.cert_base }}' bash -s" < deploy/remote-deploy.sh
